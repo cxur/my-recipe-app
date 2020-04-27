@@ -1,0 +1,27 @@
+.searchFormDiv {
+   position: relative;
+   margin-top: 20px;
+   padding: 30px;
+   display: flex;
+   justify-content: center;
+   background: linear-gradient(90deg, rgba(235,31,13,1) 0%, rgba(154,23,34,1) 20%, rgba(255,0,31,1) 100%, rgba(9,9,121,1) 100%);
+}
+
+.searchFormDiv form {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    min-width : 50vw;
+    max-width: 80vw;
+}
+
+.searchFormDiv input {
+    flex-grow: 4;
+    margin: 10px;
+}
+
+.searchFormDiv button {
+    flex-grow: 1;
+    margin: 10px;
+}
+

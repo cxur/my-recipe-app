@@ -1,0 +1,34 @@
+
+.navBarItem {
+        display: flex;
+        flex-direction: row;
+        padding-left: 0;
+        margin: 5px;
+        list-style: none;
+}
+
+button {
+    border: none;
+    background: none;
+    color: white;
+}
+
+button:focus {
+    outline:0;
+}
+
+button:hover {
+    color: gainsboro;
+}
+
+a {
+    color: white;
+}
+
+a:hover{
+    color: gainsboro;
+}
+
+svg {
+    margin-right: 5px;
+}

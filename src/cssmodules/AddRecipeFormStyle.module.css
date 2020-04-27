@@ -1,0 +1,26 @@
+.recipeFormShow {
+    display: block;
+    position: absolute;
+    top: 100px;
+    transition: top 1ms ease-in, opacity 500ms 2ms ease-in;
+    z-index: 1;
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 10px;
+    min-width: 500px;
+    max-width: 500px;
+    background: white;
+    border-radius: 5px;
+    -webkit-box-shadow: 10px 10px 15px -6px rgba(0, 0, 0, 0.65);
+    -moz-box-shadow: 10px 10px 15px -6px rgba(0, 0, 0, 0.65);
+    box-shadow: 10px 10px 15px -6px rgba(0, 0, 0, 0.65);
+}
+
+
+
+.recipeFormShow.recipeFormHide {
+     top:-1000px;
+     opacity: 0;
+     transition: opacity 500ms ease-in, top 500ms 1s ease-in;
+} 

@@ -1,0 +1,13 @@
+.background {
+    max-width: 100vw;
+    height: 100vh;
+    background: rgb(13, 155, 235);
+    background: linear-gradient(265deg, rgba(13, 155, 235, 1) 0%, rgba(51, 208, 198, 1) 20%, rgba(10, 149, 222, 1) 100%, rgba(9, 9, 121, 1) 100%);
+}
+
+.buttonSec {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
