@@ -32,16 +32,21 @@ function App() {
   }, [searchQueryLocalRecipes])
 
   const getRecipesFromInternet = async () => {
-    const response = await fetch(`https://api.edamam.com/search?q=${searchQuery}&app_id=${API_ID}&app_key=${API_KEY}`);
-    const data = await response.json();
-    setInternetRecipes(data.hits);
-  };
+    if (searchQuery) {
+      const response = await fetch(`https://api.edamam.com/search?q=${searchQuery}&app_id=${API_ID}&app_key=${API_KEY}`);
+      const data = await response.json();
+      console.log('INTERNET RECIPES: ' + data.hits);
+      setInternetRecipes(data.hits);
+    }
 
+  };
   const getLocalRecipes = async () => {
-    const response =  await fetch('http://localhost:9005/api/recipeApp/recipe');
-    const data = await response.json();
-    console.log(data);
-    setLocalRecipes(data.hits);
+    if (searchQueryLocalRecipes) {
+      const response = await fetch('http://localhost:9005/api/recipeApp/recipe');
+      const data = await response.json();
+      console.log('LOCAL RECIPES2: ' + data._embedded.recipes);
+      setLocalRecipes(data._embedded.recipes);
+    }
   };
 
   const onSubmitSearchQuery = searchQuery => {
@@ -68,11 +73,13 @@ function App() {
         <Route exact component={Home} path="/" />
         <Route exact path="/find-recipes">
           <SearchBar onSubmitSearchQuery={onSubmitSearchQuery} />
-          <RecipeContainer recipesList={internetRecipes}></RecipeContainer>
+          <RecipeContainer recipesList={internetRecipes}
+            source="internet" />
         </Route>
         <Route exact path="/my-recipes">
           <SearchBar onSubmitSearchQuery={onSubmitSearchQueryMyRecipes} />
-          <RecipeContainer recipesList={localRecipes}></RecipeContainer>
+          <RecipeContainer recipesList={localRecipes}
+            source="local" />
         </Route>
       </Switch>
     </div>

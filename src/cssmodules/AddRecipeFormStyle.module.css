@@ -8,13 +8,19 @@
     right: 0;
     margin: auto;
     padding: 10px;
-    min-width: 500px;
-    max-width: 500px;
+    min-width: 800px;
+    max-width: 800px;
     background: white;
     border-radius: 5px;
     -webkit-box-shadow: 10px 10px 15px -6px rgba(0, 0, 0, 0.65);
     -moz-box-shadow: 10px 10px 15px -6px rgba(0, 0, 0, 0.65);
     box-shadow: 10px 10px 15px -6px rgba(0, 0, 0, 0.65);
+}
+
+.formHeader {
+    padding: 10px;
+    margin: 0;
+    font-size: 1.5em;
 }
 
 
