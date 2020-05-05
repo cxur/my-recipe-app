@@ -16,7 +16,8 @@ export default function RecipeContainer({ recipesList, source }) {
                             ingredients={recipeData.recipe.ingredientLines}
                         />
                         : <RecipeCards
-                            image={'data:image/jpg;base64,'+recipeData.recipeImage}
+                            image={recipeData.recipeImage?'data:image/jpg;base64,'+recipeData.recipeImage
+                            :recipeData.recipeImageUrl}
                             title={recipeData.recipeName}
                             ingredients={recipeData.recipeIngredients.split(',')}
                         />

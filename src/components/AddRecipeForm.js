@@ -12,16 +12,16 @@ export const AddRecipeForm = ({ showForm = false, onClickAddRecipe }) => {
         recipeUrl: '',
         recipeIngredients: '',
         recipeSteps: '',
-        recipeSource: '',
-        recipeURLPicture: '',
-        recipeImage: '',
+        recipeSource: 'local',
+        recipeImageUrl: '',
+        multiPartRecipeImage: '',
         appUser: '1'
     }
     const [recipeInput, setRecipeInput] = useReducer((state, newState) => ({ ...state, ...newState }),initialState)
 
     const handleInputChange = event => {
         const fieldName = event.target.name;
-        const fieldValue = fieldName === "recipeImage" ? 
+        const fieldValue = fieldName === "multiPartRecipeImage" ? 
         event.target.files[0]:event.target.value;
 
         setRecipeInput({ [fieldName]: fieldValue });
@@ -31,7 +31,7 @@ export const AddRecipeForm = ({ showForm = false, onClickAddRecipe }) => {
 
         const formData = new FormData();
 
-        Object.keys(recipeInput).forEach(key => formData.append(key, recipeInput[key]));
+        Object.keys(recipeInput).forEach(key => recipeInput[key] ? formData.append(key, recipeInput[key]):null);
         const response = await fetch('http://localhost:9005/api/recipeApp/recipe/recipeLOCAL', {
             method: 'POST',
             body:formData
@@ -80,19 +80,19 @@ export const AddRecipeForm = ({ showForm = false, onClickAddRecipe }) => {
                             value={recipeInput.recipeSteps} onChange={handleInputChange} />
                     </div>
                 </div>
-                <div className="form-group">
+                {/* <div className="form-group">
                     <input type="hidden" value="local" className="form-control" id="recipeSource" name="recipeSource"
                      onChange={handleInputChange} />
-                </div>
+                </div> */}
                 <div className="form-group">
-                    <label htmlFor="recipeURLPicture">Image Url:</label>
-                    <input type="text" className="form-control" id="recipeURLPicture" name="recipeURLPicture" 
-                    value={recipeInput.recipeURLPicture} onChange={handleInputChange} />
+                    <label htmlFor="recipeImageUrl">Image Url:</label>
+                    <input type="text" className="form-control" id="recipeImageUrl" name="recipeImageUrl" 
+                    value={recipeInput.recipeImageUrl} onChange={handleInputChange} />
                 </div>
                 <div className="custom-file">
-                    <input type="file" className="custom-file-input" id="recipeImage" name="recipeImage" 
+                    <input type="file" className="custom-file-input" id="multiPartRecipeImage" name="multiPartRecipeImage" 
                     onChange={handleInputChange} />
-                    <label className="custom-file-label" htmlFor="recipeImage">Personalize Image</label>
+                    <label className="custom-file-label" htmlFor="multiPartRecipeImage">Personalize Image</label>
                 </div>
 
                 <div className="modal-footer">
