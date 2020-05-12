@@ -1,0 +1,21 @@
+.buttonContainer {
+    position: absolute;
+    width: 100%;
+    text-align: end;
+}
+.buttonDisplay {
+    display: none;
+}
+
+.svgActionPanel {
+    width: 24px;
+    height: 24px;
+    transition: width ease-in 0.2s, height ease-in 0.2s;
+    margin: 0;
+}
+
+.svgActionPanel:hover {
+    width: 28px;
+    height: 28px;
+    fill: white;
+}

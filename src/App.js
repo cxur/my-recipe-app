@@ -49,6 +49,48 @@ function App() {
     }
   };
 
+  const removeRecipeFromList = (recipeUrl) => {
+
+    console.log("deleting ..." + recipeUrl);
+
+    setLocalRecipes(localRecipes.filter(value => value._links.recipe.href !== recipeUrl));
+  }
+
+  const addRecipeToList = async (recipeURI) => {
+
+
+    const toAddRecipeData = internetRecipes.filter(recipe => recipe.recipe.uri === recipeURI)
+      .map(recipe => {
+        const newRecipeFormData = new FormData();
+        newRecipeFormData.append("recipeName", recipe.recipe.label);
+        newRecipeFormData.append("recipeUrl", recipe.recipe.shareAs);
+        newRecipeFormData.append("recipeIngredients", recipe.recipe.ingredientLines.join());
+        newRecipeFormData.append("recipeSource", "internet");
+        newRecipeFormData.append("recipeImageUrl", recipe.recipe.image);
+        newRecipeFormData.append("appUser", "1");
+
+        return newRecipeFormData;
+      });
+
+    const data2 = await dx(toAddRecipeData);
+    console.table(localRecipes);
+    setLocalRecipes([...localRecipes, data2]);
+
+  }
+
+  async function dx(formData) {
+    const response = await fetch('http://localhost:9005/api/recipeApp/recipe/recipeLOCAL', {
+      method: 'POST',
+      body: formData[0]
+    });
+
+    const data = await response.json();
+
+    console.log(data);
+
+    return data;
+  }
+
   const onSubmitSearchQuery = searchQuery => {
     setSearchQuery(searchQuery);
   }
@@ -74,12 +116,17 @@ function App() {
         <Route exact path="/find-recipes">
           <SearchBar onSubmitSearchQuery={onSubmitSearchQuery} />
           <RecipeContainer recipesList={internetRecipes}
-            source="internet" />
+            source="internet"
+            removeRecipeFromList={removeRecipeFromList}
+            addRecipeToList={addRecipeToList}
+          />
         </Route>
         <Route exact path="/my-recipes">
           <SearchBar onSubmitSearchQuery={onSubmitSearchQueryMyRecipes} />
           <RecipeContainer recipesList={localRecipes}
-            source="local" />
+            source="local"
+            removeRecipeFromList={removeRecipeFromList}
+          />
         </Route>
       </Switch>
     </div>
